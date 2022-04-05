@@ -23,11 +23,23 @@ a = prompt.split()
 b = transcription[0].split()
 
 
-s = SequenceMatcher(None, a, b)
-for tag, i1, i2, j1, j2 in s.get_opcodes():
-  if tag  != 'equal':
-    print('{:7}   a[{}:{}] --> b[{}:{}] {!r:>8} --> {!r}'.format(
-        tag, i1, i2, j1, j2, a[i1:i2], b[j1:j2]))
+def make_tag(a, b):
+  new = "<p style='color: green'>"
+  s = SequenceMatcher(None, a, b)
+  for tag, i1, i2, j1, j2 in s.get_opcodes():
+    if tag == 'equal':
+      new += a[i1:i2]
+    elif tag ==  "delete":
+      new += f"<del style='color: red'>{a[i1:i2]}</del>"
+    elif tag == "insert":
+      new += f"<ins style='color: orange'>{b[j1:j2]}</ins>"
+    elif tag == "replace":
+      new += f"<del style='color: red'>{a[i1:i2]}</del>"
+      new += f"<ins style='color: orange'>{b[j1:j2]}</ins>"
+  new += "</p>"
+  return new
+
+reponse = make_tag(a,  b)
 
 print("gop", gop_score)
 
