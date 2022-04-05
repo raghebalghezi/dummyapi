@@ -1,0 +1,4 @@
+/server/*
+/__pycache__/*
+*.wav
+.DS_Store
