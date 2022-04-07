@@ -37,12 +37,16 @@ def read_aloud(prompt, audio):
 
   gop_score = 1 - cer(prompt, transcription[0])
 
+  results = dict()
+  results['gop'] = gop_score
+
   a = prompt
   b = transcription[0]
 
   res = make_tag(a, b)
+  results['annnotated_response'] = res
 
-  return {"gop", gop_score, "annnotated_response": res}
+  return results
 
 # replace   a[1:4] --> b[1:3] ['MUSTA', 'POLL', 'GIZE'] --> ['MUST', 'APOLOGIZE']
 # replace   a[8:9] --> b[7:8] ['HEIR'] --> ['HERE']

@@ -2,7 +2,7 @@ import math
 import parselmouth
 import statistics
 from parselmouth.praat import call
-
+import numpy as np
 
 def speech_rate(filename):
     silencedb = -25
@@ -334,3 +334,31 @@ def get_pitch_attributes(filename, pitch_type='preferred', time_step=0., min_tim
                         for value in pitch_values]
 
     return attributes#, pitch_values
+
+
+
+def nPVI(durations):
+    """
+    Calculate normalized pairwise variability index
+    :param durations:
+    :return:
+    """
+    #https://assta.org/proceedings/sst/2006/sst2006-62.pdf
+    s = []
+    for idx in range(1,len(durations)):
+        s.append(float(durations[idx-1]-durations[idx])/float((durations[idx-1]+durations[idx])/2))
+
+    return 100 / float(len(durations)-1) * np.sum(np.abs(s))
+
+def rPVI(durations):
+    """
+    Calculate raw pairwise variability index
+    :param durations:
+    :return:
+    """
+
+    s = []
+    for idx in range(1,len(durations)):
+        s.append(float(durations[idx-1]-durations[idx]))
+
+    return np.sum(np.abs(s)) / (len(durations)-1)
