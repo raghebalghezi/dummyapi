@@ -1,6 +1,17 @@
 # sent_id = 1
-# text = Haluaisin juoda maitoa.
-1	Haluaisin	_	_	_	_	0	root	_	_
-2	juoda	_	_	_	_	1	xcomp	_	_
-3	maitoa	_	_	_	_	2	obj	_	_
-4	.	_	_	_	_	1	punct	_	_
+# text = YA WAT IN THEAT A NEW WAT SCOYA YEAR AFTER YOUNACIAT MEN YAHAR DEED AUTANKO
+1	YA	_	_	_	_	0	root	_	_
+2	WAT	_	_	_	_	1	flat:name	_	_
+3	IN	_	_	_	_	1	flat:name	_	_
+4	THEAT	_	_	_	_	1	flat:name	_	_
+5	A	_	_	_	_	1	flat:name	_	_
+6	NEW	_	_	_	_	1	flat:name	_	_
+7	WAT	_	_	_	_	1	flat:name	_	_
+8	SCOYA	_	_	_	_	1	flat:name	_	_
+9	YEAR	_	_	_	_	1	flat:name	_	_
+10	AFTER	_	_	_	_	1	flat:name	_	_
+11	YOUNACIAT	_	_	_	_	1	flat:name	_	_
+12	MEN	_	_	_	_	1	flat:name	_	_
+13	YAHAR	_	_	_	_	1	flat:name	_	_
+14	DEED	_	_	_	_	1	flat:name	_	_
+15	AUTANKO	_	_	_	_	1	punct	_	_

@@ -1,5 +1,5 @@
 import torch
-from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC
+
 import soundfile as sf
 from scipy import stats
 from scripts.fluency import rPVI, nPVI
@@ -7,28 +7,6 @@ import numpy as np
 from dataclasses import dataclass
 
 
-def model_loader(LANG):
-        if LANG == 'fi':
-                processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base-960h")
-                model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h", output_hidden_states=True)
-        if LANG == 'sv':
-                processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base-960h")
-                model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
-        return model, processor
-
-
-model, processor = model_loader("fi")
-
-pronun_features = ['acoustic_model_score','cons_dur_kur', 'cons_dur_max', 
-        'cons_dur_mean', 'cons_dur_min',
-       'cons_dur_skew', 'cons_dur_var', 'cons_prob_kur', 'cons_prob_max',
-       'cons_prob_mean', 'cons_prob_min', 'cons_prob_skew', 'cons_prob_var', 'nPVI_cons', 
-       'nPVI_vowels', 'rPVI_cons',
-       'rPVI_vowels', 'sample', 'vowels_dur_kur',
-       'vowels_dur_max', 'vowels_dur_mean', 'vowels_dur_min',
-       'vowels_dur_skew', 'vowels_dur_var', 'vowels_prob_kur',
-       'vowels_prob_max', 'vowels_prob_mean', 'vowels_prob_min',
-       'vowels_prob_skew', 'vowels_prob_var']
 
 @dataclass
 class Point:
@@ -38,7 +16,7 @@ class Point:
 
 # features from asr: transcript, above, mean_vect_embed
 
-def generate_asr_features(audio_path):
+def generate_asr_features(audio_path,  model, processor):
 
         audio, sample_rate = sf.read(audio_path)
 
@@ -79,8 +57,6 @@ def generate_asr_features(audio_path):
         letters = set("abcdefghijklmnopqrstuvwxyz".upper())
         vowels = set("aeiouywåäö".upper()) #a e i o u y å ä ö
         consonants = letters.difference(vowels)
-        print(consonants)
-
 
         vowels_dur = []
         cons_dur = []
@@ -139,8 +115,6 @@ def generate_asr_features(audio_path):
         return feature_dict
 
 
-
-print(generate_asr_features("8_1_joens_3hv_16.wav"))
 
 
 # print("AM score", acoustic_model_score)
