@@ -25,6 +25,7 @@ def generate_fluency_features(audio):
 
     return total_fluency_features
 
-feat_dict = generate_fluency_features('8_1_joens_3hv_16.wav')
+# feat_dict = generate_fluency_features('8_1_joens_3hv_16.wav')
 
-print(set(feat_dict.keys()).difference(set(feature_selected)))
+# print(set(feat_dict.keys()).difference(set(feature_selected)))
+# print(feat_dict)

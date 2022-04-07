@@ -1,7 +1,6 @@
 import math
 import parselmouth
 import statistics
-from glob import glob
 from parselmouth.praat import call
 
 

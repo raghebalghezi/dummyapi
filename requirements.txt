@@ -13,7 +13,9 @@ importlib-metadata==4.11.1
 itsdangerous==2.0.1
 Jinja2==3.0.3
 MarkupSafe==2.0.1
+numpy==1.21.5
 orjson==3.6.7
+praat-parselmouth==0.4.1
 pydantic==1.9.0
 python-dotenv==0.19.2
 python-multipart==0.0.5
