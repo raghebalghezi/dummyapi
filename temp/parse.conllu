@@ -1,0 +1,6 @@
+# sent_id = 1
+# text = Haluaisin juoda maitoa.
+1	Haluaisin	_	_	_	_	0	root	_	_
+2	juoda	_	_	_	_	1	xcomp	_	_
+3	maitoa	_	_	_	_	2	obj	_	_
+4	.	_	_	_	_	1	punct	_	_
