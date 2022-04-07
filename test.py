@@ -10,11 +10,11 @@ LANG = "fi"
 
 def model_loader(LANG):
         if LANG == 'fi':
-            model = Wav2Vec2ForCTC.from_pretrained("/Volumes/scratch/elec/puhe/p/getmany1/wav2vec2-large-14.2k-fi-digitala_LAQ_09022022/checkpoint-6552")
-            processor = Wav2Vec2Processor.from_pretrained("/Volumes/scratch/elec/puhe/p/getmany1/wav2vec2-large-14.2k-fi-digitala_LAQ_09022022/checkpoint-6552")
+            model = Wav2Vec2ForCTC.from_pretrained("/var/www/html/digi_rsrc/auto_speak_assess/auto_speak_assess/wav2vec2_models/wav2vec2-large-14.2k-fi-digitala_LAQ_09022022/checkpoint-6552")
+            processor = Wav2Vec2Processor.from_pretrained("/var/www/html/digi_rsrc/auto_speak_assess/auto_speak_assess/wav2vec2_models/wav2vec2-large-14.2k-fi-digitala_LAQ_09022022/checkpoint-6552")
         if LANG == 'sv':
-            model =  Wav2Vec2ForCTC.from_pretrained("/Volumes/scratch/elec/puhe/p/getmany1/wav2vec2_large_voxrex_KBLab_vocab_sv_digitala_LAQ_14012022/checkpoint-8560")
-            processor = Wav2Vec2Processor.from_pretrained("/Volumes/scratch/elec/puhe/p/getmany1/wav2vec2_large_voxrex_KBLab_vocab_sv_digitala_LAQ_14012022/checkpoint-8560")
+            model =  Wav2Vec2ForCTC.from_pretrained("/var/www/html/digi_rsrc/auto_speak_assess/auto_speak_assess/wav2vec2_models/wav2vec2_large_voxrex_KBLab_vocab_sv_digitala_LAQ_14012022/checkpoint-8560")
+            processor = Wav2Vec2Processor.from_pretrained("/var/www/html/digi_rsrc/auto_speak_assess/auto_speak_assess/wav2vec2_models/wav2vec2_large_voxrex_KBLab_vocab_sv_digitala_LAQ_14012022/checkpoint-8560")
         return model, processor
 
 def parser_loader(LANG):
