@@ -65,7 +65,6 @@ def ovix(s):
 
 
 
-
 #6 TF-IDF
 def get_mean_tfidf_indices(thresh_top=1115):
     indices = {}

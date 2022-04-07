@@ -9,21 +9,8 @@ model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
 
 audio, sample_rate = sf.read("/content/must_apologize.wav")
 prompt = "i musta poll gize for dragging you all heir in such an un common hour".upper()
-device = torch.device('cpu')
-input_values = processor(audio, sampling_rate=16000, return_tensors="pt", padding="longest").input_values
-with torch.no_grad():
-    logits = model(input_values.to(device)).logits
-predicted_ids = torch.argmax(logits, dim=-1)
-transcription = processor.batch_decode(predicted_ids)
-# return transcription[0]
 
-gop_score = 1 - cer(prompt, transcription[0])
-
-a = prompt.split()
-b = transcription[0].split()
-
-
-def make_tag(a, b):
+def make_tag(a: str, b: str) -> str:
   new = "<p style='color: green'>"
   s = SequenceMatcher(None, a, b)
   for tag, i1, i2, j1, j2 in s.get_opcodes():
@@ -39,9 +26,23 @@ def make_tag(a, b):
   new += "</p>"
   return new
 
-reponse = make_tag(a,  b)
+def read_aloud(prompt, audio):
+  device = torch.device('cpu')
+  input_values = processor(audio, sampling_rate=16000, return_tensors="pt", padding="longest").input_values
+  with torch.no_grad():
+      logits = model(input_values.to(device)).logits
+  predicted_ids = torch.argmax(logits, dim=-1)
+  transcription = processor.batch_decode(predicted_ids)
+  # return transcription[0]
 
-print("gop", gop_score)
+  gop_score = 1 - cer(prompt, transcription[0])
+
+  a = prompt
+  b = transcription[0]
+
+  res = make_tag(a, b)
+
+  return {"gop", gop_score, "annnotated_response": res}
 
 # replace   a[1:4] --> b[1:3] ['MUSTA', 'POLL', 'GIZE'] --> ['MUST', 'APOLOGIZE']
 # replace   a[8:9] --> b[7:8] ['HEIR'] --> ['HERE']
