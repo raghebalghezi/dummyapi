@@ -2,6 +2,8 @@ import shutil
 import uvicorn
 from typing import Optional
 from fastapi import FastAPI, UploadFile, File, Query
+from utils import model_loader, make_tag
+from readaloud import generate_readaloud
 
 app = FastAPI(title="Digitala",
                 description="In-progress API developed by Aalto-Speech  Group",
@@ -25,11 +27,14 @@ async def root(file: UploadFile = File(...),
             shutil.copyfileobj(file.file, buffer)
 
     if task == 'readaloud':
-            return {"file_name": file.filename,
-                    "Language": lang,
-                    "Task": task,
-                    "prompt":  prompt,
-                    "GOP_score": 0.7}
+        model, processor = model_loader(lang)
+        info =  generate_readaloud(file.filename, prompt, model, processor)
+        return {"file_name": file.filename,
+                "Language": lang,
+                "Task": task,
+                "prompt":  prompt,
+                "feedback": info['annnotated_response'],
+                "GOP_score": info['gop']}
 
     return {"file_name": file.filename,
             "Language": lang,
