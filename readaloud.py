@@ -4,10 +4,8 @@ from jiwer import cer, wer
 from utils import model_loader, make_tag
 
 
-
 model, processor = model_loader('fi')
   
-
 
 def generate_readaloud(audio_path, prompt, model, processor):
 
